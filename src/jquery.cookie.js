@@ -70,6 +70,7 @@
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
 				options.samesite  ? '; samesite=' + options.samesite : '',
+				options.httponly  ? '; httponly' : ''
 				options.secure && window.location.protocol == "https:"  ? '; secure' : ''
 			];
 			
