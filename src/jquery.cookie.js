@@ -63,14 +63,19 @@
 				var days = options.expires, t = options.expires = new Date();
 				t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
 			}
-
-			return (document.cookie = [
+			
+			var cookieData = [
 				encode(key), '=', stringifyCookieValue(value),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
-				options.secure  ? '; secure' : ''
-			].join(''));
+				options.samesite  ? '; samesite=' + options.samesite : '',
+				options.secure && window.location.protocol == "https:"  ? '; secure' : ''
+			];
+			
+			if(options.debug) console.log("cookieData", cookieData);
+
+			return (document.cookie = cookieData.join(''));
 		}
 
 		// Read
